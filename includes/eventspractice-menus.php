@@ -63,10 +63,5 @@ function eventspractice_settings_subpage_markup()
     if ( !current_user_can('manage_options') ) {
         return;
     }
-    ?>
-    <div class="wrap">
-        <h1><?php esc_html_e( get_admin_page_title(), 'eventspractice' ); ?></h1>
-        <p><?php esc_html_e( 'Some subpage content.', 'eventspractice' ); ?></p>
-    </div>
-    <?php
+    include( EVENTSPRACTICE_DIR . 'templates/admin/settings-page.php' );
 }

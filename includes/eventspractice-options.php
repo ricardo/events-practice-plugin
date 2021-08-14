@@ -4,8 +4,8 @@
 // SQL Query: SELECT * FROM wp_options WHERE option_name = "eventspractice_option";
 function wpplugin_options() {
 
-  add_option( 'eventspractice_option', 'My NEW Plugin Options' );
-  update_option( 'eventspractice_option', 'My Updated Plugin Options' );
+//   add_option( 'eventspractice_option', 'My NEW Plugin Options' );
+  update_option( 'eventspractice_option', 'This is a test with the Options API' );
   // delete_option( 'eventspractice_option' );
 
 }

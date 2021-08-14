@@ -17,11 +17,11 @@
  }
 
 // Define plugin paths and URLs
-define( 'WPPLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'WPPLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'EVENTSPRACTICE_URL', plugin_dir_url( __FILE__ ) );
+define( 'EVENTSPRACTICE_DIR', plugin_dir_path( __FILE__ ) );
 
 
-include( plugin_dir_path( __FILE__ ). 'includes/eventspractice-menus.php' );
+include( EVENTSPRACTICE_DIR. 'includes/eventspractice-menus.php' );
 
 // Add link to the settings page below the plugin description
 function eventspractice_add_settings_link( $links )
