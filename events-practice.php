@@ -1,15 +1,11 @@
 /**
  * Plugin Name:       Events Practice
- * Plugin URI:        
- * Description:       Handle the basics with this plugin.
- * Version:           1.10.3
- * Requires at least: 5.2
- * Requires PHP:      7.2
- * Author:            John Smith
- * Author URI:        https://author.example.com/
+ * Plugin URI:        https://github.com/AtrumGeost/events-practice-plugin
+ * Description:       A plugin to practice for the Dev. App.
+ * Version:           0.0.1
+ * Author:            Jorge Calle
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Update URI:        https://example.com/my-plugin/
- * Text Domain:       my-basics-plugin
+ * Text Domain:       events-practice
  * Domain Path:       /languages
  */
