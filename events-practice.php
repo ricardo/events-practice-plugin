@@ -1,3 +1,4 @@
+<?php
 /**
  * Plugin Name:       Events Practice
  * Plugin URI:        https://github.com/AtrumGeost/events-practice-plugin
@@ -9,3 +10,8 @@
  * Text Domain:       events-practice
  * Domain Path:       /languages
  */
+
+ // If this file is called directly, abort
+ if ( ! defined( 'WPINC' ) ) {
+     die;
+ }
