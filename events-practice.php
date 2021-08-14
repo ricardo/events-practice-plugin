@@ -16,7 +16,7 @@
      die;
  }
 
- // Add page to WP Admin
+ // Add pages to WP Admin
  function eventspractice_settings_page()
  {
      add_menu_page(
@@ -87,5 +87,15 @@ function eventspractice_settings_subpage_markup()
     </div>
     <?php
 }
+
+// Add link to the settings page below the plugin description
+function eventspractice_add_settings_link( $links )
+{
+    $settings_link = '<a href="admin.php?page=wpplugin-settings">' . esc_html__( 'Settings', 'eventspractice' ) . '</a>';
+    array_push( $links, $settings_link );
+    return $links;
+}
+$filter_name = "plugin_action_links_" . plugin_basename( __FILE__ );
+add_filter( $filter_name, 'eventspractice_add_settings_link' );
 
 ?>
