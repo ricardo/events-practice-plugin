@@ -17,7 +17,7 @@
         __( 'Events', 'eventspractice' ),
         __( 'Events', 'eventspractice' ),
         'manage_options',
-        'wpplugin-events',
+        'eventspractice-events',
         'eventspractice_settings_subpage_markup'
      );
 
@@ -26,7 +26,7 @@
         __( 'RSVPs', 'eventspractice' ),
         __( 'RSVPs', 'eventspractice' ),
         'manage_options',
-        'wpplugin-rsvps',
+        'eventspractice-rsvps',
         'eventspractice_settings_subpage_markup'
      );
 
@@ -35,7 +35,7 @@
         __( 'Settings', 'eventspractice' ),
         __( 'Settings', 'eventspractice' ),
         'manage_options',
-        'wpplugin-settings',
+        'eventspractice-settings',
         'eventspractice_settings_subpage_markup'
      );
  }
