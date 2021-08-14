@@ -16,8 +16,10 @@
      die;
  }
 
- // Define plugin URL as a constant
- define( 'EVENTSPRACTICE_URL', plugin_dir_url( __FILE__ ) );
+// Define plugin paths and URLs
+define( 'WPPLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'WPPLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
 
 include( plugin_dir_path( __FILE__ ). 'includes/eventspractice-menus.php' );
 
@@ -30,5 +32,8 @@ function eventspractice_add_settings_link( $links )
 }
 $filter_name = "plugin_action_links_" . plugin_basename( __FILE__ );
 add_filter( $filter_name, 'eventspractice_add_settings_link' );
+
+// Create Plugin Options
+include( plugin_dir_path( __FILE__ ) . 'includes/eventspractice-options.php');
 
 ?>
