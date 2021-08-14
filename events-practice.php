@@ -16,77 +16,10 @@
      die;
  }
 
- // Add pages to WP Admin
- function eventspractice_settings_page()
- {
-     add_menu_page(
-         __( 'Events Practice', 'eventspractice' ),
-         __( 'Events Practice', 'eventspractice' ),
-         'manage_options',
-         'eventspractice',
-         'eventspractice_settings_page_markup',
-         'dashicons-calendar-alt',
-         25
-     );
+ // Define plugin URL as a constant
+ define( 'EVENTSPRACTICE_URL', plugin_dir_url( __FILE__ ) );
 
-     add_submenu_page(
-        'eventspractice',
-        __( 'Events', 'eventspractice' ),
-        __( 'Events', 'eventspractice' ),
-        'manage_options',
-        'wpplugin-events',
-        'eventspractice_settings_subpage_markup'
-     );
-
-     add_submenu_page(
-        'eventspractice',
-        __( 'RSVPs', 'eventspractice' ),
-        __( 'RSVPs', 'eventspractice' ),
-        'manage_options',
-        'wpplugin-rsvps',
-        'eventspractice_settings_subpage_markup'
-     );
-
-     add_submenu_page(
-        'eventspractice',
-        __( 'Settings', 'eventspractice' ),
-        __( 'Settings', 'eventspractice' ),
-        'manage_options',
-        'wpplugin-settings',
-        'eventspractice_settings_subpage_markup'
-     );
- }
-add_action( 'admin_menu', 'eventspractice_settings_page' );
-
-// Display content for the admin page
-function eventspractice_settings_page_markup()
-{
-    // Double check user capabilities
-    if ( !current_user_can('manage_options') ) {
-        return;
-    }
-    ?>
-    <div class="wrap">
-        <h1><?php esc_html_e( get_admin_page_title(), 'eventspractice' ); ?></h1>
-        <p><?php esc_html_e( 'Some content.', 'eventspractice' ); ?></p>
-    </div>
-    <?php
-}
-
-// Display content for the admin subpages
-function eventspractice_settings_subpage_markup()
-{
-    // Double check user capabilities
-    if ( !current_user_can('manage_options') ) {
-        return;
-    }
-    ?>
-    <div class="wrap">
-        <h1><?php esc_html_e( get_admin_page_title(), 'eventspractice' ); ?></h1>
-        <p><?php esc_html_e( 'Some subpage content.', 'eventspractice' ); ?></p>
-    </div>
-    <?php
-}
+include( plugin_dir_path( __FILE__ ). 'includes/eventspractice-menus.php' );
 
 // Add link to the settings page below the plugin description
 function eventspractice_add_settings_link( $links )
