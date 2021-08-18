@@ -21,6 +21,11 @@ define( 'EVENTSPRACTICE_URL', plugin_dir_url( __FILE__ ) );
 define( 'EVENTSPRACTICE_DIR', plugin_dir_path( __FILE__ ) );
 
 
+// Include the main plugin class
+include( EVENTSPRACTICE_DIR. '/class-eventspractice.php' );
+
+
+
 include( EVENTSPRACTICE_DIR. 'includes/eventspractice-menus.php' );
 
 // Add link to the settings page below the plugin description
