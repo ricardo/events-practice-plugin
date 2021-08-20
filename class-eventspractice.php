@@ -71,70 +71,127 @@ function eventspractice_init() {
 add_action( 'init', 'eventspractice_init' );
 
 /* Meta box setup function. */
-function smashing_post_meta_boxes_setup() {
+function eventspractice_post_meta_boxes_setup() {
 
 	/* Add meta boxes on the 'add_meta_boxes' hook. */
-	add_action( 'add_meta_boxes', 'smashing_add_post_meta_boxes' );
+	add_action( 'add_meta_boxes', 'eventspractice_add_post_meta_boxes' );
 	/* Save post meta on the 'save_post' hook. */
-	add_action( 'save_post', 'smashing_save_post_class_meta', 10, 2 );
+	add_action( 'save_post', 'eventspractice_save_post_class_meta', 10, 2 );
   }
 
 /* Create one or more meta boxes to be displayed on the post editor screen. */
-function smashing_add_post_meta_boxes() {
+function eventspractice_add_post_meta_boxes() {
 
 	add_meta_box(
-	  'smashing-post-class',      // Unique ID
-	  esc_html__( 'Post Class', 'eventspractice' ),    // Title
-	  'smashing_post_class_meta_box',   // Callback function
+	  'eventspractice-number-attendees',      // Unique ID
+	  esc_html__( 'Number of attendees', 'eventspractice' ),    // Title
+	  'eventspractice_number_attendees_meta_box',   // Callback function
 	  'event',         // Admin page (or post type)
 	  'side',         // Context
 	  'default'         // Priority
 	);
+
+	add_meta_box(
+		'eventspractice-location',      // Unique ID
+		__( 'Location', 'eventspractice' ),    // Title
+		'eventspractice_location_meta_box',   // Callback function
+		'event',         // Admin page (or post type)
+		'side',         // Context
+		'default'         // Priority
+	  );
+
+	  add_meta_box(
+		'eventspractice-date',      // Unique ID
+		__( 'Date', 'eventspractice' ),    // Title
+		'eventspractice_date_meta_box',   // Callback function
+		'event',         // Admin page (or post type)
+		'side',         // Context
+		'default'         // Priority
+	  );
   }
 
 /* Display the post meta box. */
-function smashing_post_class_meta_box( $post ) { ?>
+function eventspractice_number_attendees_meta_box( $post ) { ?>
 
-	<?php wp_nonce_field( basename( __FILE__ ), 'smashing_post_class_nonce' ); ?>
+	<?php wp_nonce_field( basename( __FILE__ ), 'eventspractice_number_attendees_nonce' ); ?>
   
 	<p>
-	  <label for="smashing-post-class"><?php _e( "Add a custom CSS class, which will be applied to WordPress' post class.", 'eventspractice' ); ?></label>
+	  <label for="eventspractice-number-attendees"><?php _e( "Maximum number of attendees for this event.", 'eventspractice' ); ?></label>
 	  <br />
-	  <input class="widefat" type="text" name="smashing-post-class" id="smashing-post-class" value="<?php echo esc_attr( get_post_meta( $post->ID, 'smashing_post_class', true ) ); ?>" size="30" />
+	  <input class="widefat" type="text" name="eventspractice-number-attendees" id="eventspractice-number-attendees" value="<?php echo esc_attr( get_post_meta( $post->ID, 'eventspractice-number-attendees', true ) ); ?>" size="30" />
 	</p>
   <?php }
 
+function eventspractice_location_meta_box( $post ) { ?>
+
+	<?php wp_nonce_field( basename( __FILE__ ), 'eventspractice_location_nonce' ); ?>
+  
+	<p>
+	  <label for="eventspractice-location"><?php _e( "Address for this event.", 'eventspractice' ); ?></label>
+	  <br />
+	  <input class="widefat" type="text" name="eventspractice-location" id="eventspractice-location" value="<?php echo esc_attr( get_post_meta( $post->ID, 'eventspractice-location', true ) ); ?>" size="30" />
+	</p>
+  <?php }
+
+function eventspractice_date_meta_box( $post ) { ?>
+
+	<?php wp_nonce_field( basename( __FILE__ ), 'eventspractice_date_nonce' ); ?>
+  
+	<p>
+	  <label for="eventspractice-date"><?php _e( "Date for this event.", 'eventspractice' ); ?></label>
+	  <br />
+	  <input class="widefat" type="text" name="eventspractice-date" id="eventspractice-date" value="<?php echo esc_attr( get_post_meta( $post->ID, 'eventspractice-date', true ) ); ?>" size="30" />
+	</p>
+  <?php }
 
 /* Save the meta box’s post metadata. */
-function smashing_save_post_class_meta( $post_id, $post ) {
+function eventspractice_save_post_class_meta( $post_id, $post ) {
 
-  /* Verify the nonce before proceeding. */
-  if ( !isset( $_POST['smashing_post_class_nonce'] ) || !wp_verify_nonce( $_POST['smashing_post_class_nonce'], basename( __FILE__ ) ) )
-    return $post_id;
+	/* Verify the nonce before proceeding. */
+	if ( !isset( $_POST['eventspractice_number_attendees_nonce'] ) || !wp_verify_nonce( $_POST['eventspractice_number_attendees_nonce'], basename( __FILE__ ) ) )
+		return $post_id;
 
-  /* Get the post type object. */
-  $post_type = get_post_type_object( $post->post_type );
+	if ( !isset( $_POST['eventspractice_location_nonce'] ) || !wp_verify_nonce( $_POST['eventspractice_location_nonce'], basename( __FILE__ ) ) )
+		return $post_id;
 
-  /* Check if the current user has permission to edit the post. */
-  if ( !current_user_can( $post_type->cap->edit_post, $post_id ) )
-    return $post_id;
+	if ( !isset( $_POST['eventspractice_date_nonce'] ) || !wp_verify_nonce( $_POST['eventspractice_date_nonce'], basename( __FILE__ ) ) )
+		return $post_id;
 
-  /* Get the posted data and sanitize it for use as an HTML class. */
-  $new_meta_value = ( isset( $_POST['smashing-post-class'] ) ? sanitize_html_class( $_POST['smashing-post-class'] ) : ’ );
+	/* Get the post type object. */
+	$post_type = get_post_type_object( $post->post_type );
 
-  /* Get the meta key. */
-  $meta_key = 'smashing_post_class';
+	/* Check if the current user has permission to edit the post. */
+	if ( !current_user_can( $post_type->cap->edit_post, $post_id ) )
+		return $post_id;
 
-  /* Get the meta value of the custom field key. */
-  $meta_value = get_post_meta( $post_id, $meta_key, true );
+	/* Get the posted data and sanitize it for use as an HTML class. */
+	$new_meta_value_number_attendees = ( isset( $_POST['eventspractice-number-attendees'] ) ? sanitize_text_field( $_POST['eventspractice-number-attendees'] ) : ’ );
+	$new_meta_value_location = ( isset( $_POST['eventspractice-location'] ) ? sanitize_text_field( $_POST['eventspractice-location'] ) : ’ );
+	$new_meta_value_date = ( isset( $_POST['eventspractice-date'] ) ? sanitize_text_field( $_POST['eventspractice-date'] ) : ’ );
 
-  if ( isset( $new_meta_value ) ) {
-	update_post_meta( $post_id, $meta_key, $new_meta_value );
-  } 
+	/* Get the meta key. */
+	$meta_key_number_attendees = 'eventspractice-number-attendees';
+	$meta_key_location = 'eventspractice-location';
+	$meta_key_date = 'eventspractice-date';
 
- 
+	/* Get the meta value of the custom field key. */
+	$meta_value_number_attendees = get_post_meta( $post_id, $meta_key_number_attendees, true );
+	$meta_value_location = get_post_meta( $post_id, $meta_key_location, true );
+	$meta_value_date = get_post_meta( $post_id, $meta_key_date, true );
+
+	if ( isset( $new_meta_value_number_attendees ) ) {
+		update_post_meta( $post_id, $meta_key_number_attendees, $new_meta_value_number_attendees );
+	} 
+	if ( isset( $meta_value_location ) ) {
+		update_post_meta( $post_id, $meta_key_location, $new_meta_value_location );
+	} 
+	if ( isset( $meta_value_date ) ) {
+		update_post_meta( $post_id, $meta_key_date, $new_meta_value_date );
+	} 
 }
 
+
+
 /* Fire our meta box setup function on the post editor screen. */
-add_action( 'load-post.php', 'smashing_post_meta_boxes_setup' );
-add_action( 'load-post-new.php', 'smashing_post_meta_boxes_setup' );
+add_action( 'load-post.php', 'eventspractice_post_meta_boxes_setup' );
+add_action( 'load-post-new.php', 'eventspractice_post_meta_boxes_setup' );
