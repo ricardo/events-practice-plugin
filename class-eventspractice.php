@@ -191,8 +191,28 @@ function eventspractice_save_post_class_meta( $post_id, $post ) {
 	} 
 }
 
-
-
 /* Fire our meta box setup function on the post editor screen. */
 add_action( 'load-post.php', 'eventspractice_post_meta_boxes_setup' );
 add_action( 'load-post-new.php', 'eventspractice_post_meta_boxes_setup' );
+
+/* Display custom posts at the end of content on CPT */
+
+function eventspractice_add_to_content( $content ) {   
+	
+	$number_attendees = get_post_meta( get_the_ID(), 'eventspractice-number-attendees', true );
+	$location = get_post_meta( get_the_ID(), 'eventspractice-location', true );
+	$date = get_post_meta( get_the_ID(), 'eventspractice-date', true );
+	
+    if( is_single( ) && 'event' == get_post_type() ) {
+		$content .= '<hr class="wp-block-separator"/>';
+        $content .= '<div class="eventspractice-metadata"><ul>';
+        $content .= "<li><strong>" . esc_html__('Max. Number of Attendees:', 'eventspractice') . "</strong> {$number_attendees}</li>";
+        $content .= "<li><strong>" . esc_html__('Location:', 'eventspractice') . "</strong> {$location}</li>";
+        $content .= "<li><strong>" . esc_html__('Date:', 'eventspractice') . "</strong> {$date}</li>";
+        $content .= '</ul></div>';
+		$content .= '<hr class="wp-block-separator"/>';
+
+    }
+    return $content;
+}
+add_filter( 'the_content', 'eventspractice_add_to_content' );
