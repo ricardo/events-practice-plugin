@@ -206,9 +206,9 @@ function eventspractice_add_to_content( $content ) {
     if( is_single( ) && 'event' == get_post_type() ) {
 		$content .= '<hr class="wp-block-separator"/>';
         $content .= '<div class="eventspractice-metadata"><ul>';
-        $content .= "<li><strong>" . esc_html__('Max. Number of Attendees:', 'eventspractice') . "</strong> {$number_attendees}</li>";
-        $content .= "<li><strong>" . esc_html__('Location:', 'eventspractice') . "</strong> {$location}</li>";
-        $content .= "<li><strong>" . esc_html__('Date:', 'eventspractice') . "</strong> {$date}</li>";
+        $content .= "<li><strong>" . esc_html__('Max. Number of Attendees:', 'eventspractice') . "</strong> " . esc_attr($number_attendees) . "</li>";
+        $content .= "<li><strong>" . esc_html__('Location:', 'eventspractice') . "</strong> " .  esc_attr($location) . "</li>";
+        $content .= "<li><strong>" . esc_html__('Date:', 'eventspractice') . "</strong> ".  esc_attr($date) . "</li>";
         $content .= '</ul></div>';
 		$content .= '<hr class="wp-block-separator"/>';
 
