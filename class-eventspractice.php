@@ -61,7 +61,7 @@ function eventspractice_init() {
 		"hierarchical" => false,
 		"rewrite" => [ "slug" => "event", "with_front" => true ],
 		"query_var" => true,
-		"supports" => [ "title", "editor", "thumbnail" ],
+		"supports" => [ "title", "editor", "thumbnail", "author" ],
 		"show_in_graphql" => false,
 		"menu_icon" => "dashicons-calendar-alt",
 	];
@@ -216,3 +216,4 @@ function eventspractice_add_to_content( $content ) {
     return $content;
 }
 add_filter( 'the_content', 'eventspractice_add_to_content' );
+

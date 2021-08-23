@@ -24,7 +24,8 @@ define( 'EVENTSPRACTICE_DIR', plugin_dir_path( __FILE__ ) );
 // Include the main plugin class
 include( EVENTSPRACTICE_DIR. '/class-eventspractice.php' );
 
-
+// Include the rsvp class
+include( EVENTSPRACTICE_DIR. '/class-reservation.php' );
 
 include( EVENTSPRACTICE_DIR. 'includes/eventspractice-menus.php' );
 
