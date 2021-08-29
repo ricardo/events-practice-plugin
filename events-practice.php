@@ -29,6 +29,9 @@ include( EVENTSPRACTICE_DIR. '/class-reservation.php' );
 
 include( EVENTSPRACTICE_DIR. 'includes/eventspractice-menus.php' );
 
+
+$events_practice = new Events_Practice();
+
 // Add link to the settings page below the plugin description
 function eventspractice_add_settings_link( $links )
 {

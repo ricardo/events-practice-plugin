@@ -258,5 +258,3 @@ if ( !class_exists( 'Events_Practice' ) ) {
 
 	}
 }
-
-$events_practice = new Events_Practice();
